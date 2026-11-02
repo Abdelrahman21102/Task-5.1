@@ -63,6 +63,7 @@ Please note that Attack 4 will not work due to MongoDB being on the Free Tier, b
 
 ## Task
 ---
+
 Every attack from the `Flow.md` file works because the Instructor controller (`instructorController.js`) trusts request input and feeds it directly into Mongoose, with no validation and no sanitation.
 
 **Fix it.** Make the login and search safe while keeping their legitimate behavior, then re-run every attack in this file and confirm each one now fails. Think about: validating/typing input, rejecting query operators from clients, not storing plain-text passwords, and not returning secret fields.
