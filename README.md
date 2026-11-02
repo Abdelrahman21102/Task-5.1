@@ -1,5 +1,4 @@
 # Task 5 (Variant): Course Review Board - With Instructor Dashboard
----
 
 We will building on top of the course review variant in task 3. Previously we implemented `JWT` authentication and now a new model and controller have been added. Let us first start with some context.
 ## Context
@@ -24,7 +23,7 @@ A `NoSQL` Injection attack is a subclass of the Injection attacks. It is a secur
 3. **Altered Logic**: The database interprets the injected input as part of the command logic rather than literal data, changing what records are matched.
 
 ## Running it
----
+
 ```bash
 npm install           # Install concurrently and the dependencies of the projects
 npm run install:all   # For safety
@@ -41,7 +40,7 @@ JWT_EXPIRES_IN=7d
 ```
 
 ## What was added on top of Task 3
----
+
 ### Server
 
 - Added a new model called Instructor with the following attributes: `name`, `username`, `password`, `department`, `role` `apiKey`, `privateEmail`, `privatePhone`.
@@ -55,14 +54,12 @@ JWT_EXPIRES_IN=7d
 - Added The `InstructorLogin.jsx` and the `InstructorDashboard.jsx` pages.
 
 ## Simulating the Attack
----
 
 For this you will need to use postman to some extent. Look through the `Flow.md` Markdown file for the detailed steps to simulate the `NoSQL` injection.
 
 Please note that Attack 4 will not work due to MongoDB being on the Free Tier, but it is still a real attack vector that you must protect against (Details in the `Flow.md` file). After reading the file Read the next section.
 
 ## Task
----
 
 Every attack from the `Flow.md` file works because the Instructor controller (`instructorController.js`) trusts request input and feeds it directly into Mongoose, with no validation and no sanitation.
 
