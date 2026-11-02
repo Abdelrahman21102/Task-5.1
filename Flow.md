@@ -232,16 +232,3 @@ Open the Instructor Portal in the web app (`/portal`) and watch the requests in
 your browser's Network tab. The real forms only ever send plain strings — the
 vulnerability is reached by **tampering the request**, not by the app itself.
 That is exactly how these bugs are exploited in the real world.
-
----
-
-## Your task
-
-Every attack above works because the Instructor Portal controller
-(`server/src/controllers/instructorController.js`) trusts request input and feeds
-it directly into Mongoose, with no validation and no sanitization.
-
-**Fix it.** Make the login and search safe while keeping their legitimate
-behavior, then re-run every attack in this file and confirm each one now fails.
-Think about: validating/typing input, rejecting query operators from clients,
-not storing plaintext passwords, and not returning secret fields.
