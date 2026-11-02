@@ -1,4 +1,10 @@
-name: Instructor Portal security tests
+import fs from 'fs';
+import path from 'path';
+
+const workflowDir = path.join(process.cwd(), '.github', 'workflows');
+const filePath = path.join(workflowDir, 'ci.yaml');
+
+const ciContent = `name: Instructor Portal security tests
 on: [push, pull_request]
 
 jobs:
@@ -14,6 +20,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/mongodb-binaries
-          key: mongodb-memory-server-6.0.14-${{ runner.os }}
+          key: mongodb-memory-server-6.0.14-\${{ runner.os }}
       - run: npm ci                 # installs the server+client workspaces
-      - run: npm test --workspace server
+      - run: npm test --workspace server`;
+
+if (!fs.existsSync(workflowDir)) {
+  fs.mkdirSync(workflowDir, { recursive: true });
+}
+fs.writeFileSync(filePath, ciContent, { encoding: 'utf8' });

@@ -1,4 +1,15 @@
-// Shared test environment for the Instructor Portal security suite.
+import fs from 'fs';
+import path from 'path';
+
+const testHelperDir = path.join(process.cwd(), 'server', 'tests', 'helpers');
+
+if (!fs.existsSync(testHelperDir)) {
+  fs.mkdirSync(testHelperDir, { recursive: true });
+}
+
+const envHelperFilePath = path.join(testHelperDir, 'testEnv.js');
+
+const envHelperContent = `// Shared test environment for the Instructor Portal security suite.
 //
 // Spins up a throwaway in-memory MongoDB (a REAL mongod, so server-side
 // operators like $regex and $where genuinely execute) and seeds it with the
@@ -16,7 +27,7 @@ import { Instructor } from '../../src/models/Instructor.js';
 
 let mongod;
 
-// The portal accounts under test. The `admin` superadmin is the high-value
+// The portal accounts under test. The \`admin\` superadmin is the high-value
 // target holding the trophy fields (apiKey / private contact info).
 export const ADMIN_PASSWORD = 'S3cr3t-Admin-Pw!';
 export const ADMIN_API_KEY = 'sk_live_9f3b2c7d8e4a1b6f0d5c2a9e';
@@ -81,3 +92,6 @@ export async function seed() {
   // create() (not insertMany) so a project's pre('save') hook runs if present.
   await Instructor.create(SEED);
 }
+`;
+
+fs.writeFileSync(envHelperFilePath, envHelperContent, { encoding: 'utf8' });

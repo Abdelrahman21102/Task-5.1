@@ -19,7 +19,6 @@ yarn-error.log*
 # OS and Editor specific files
 .DS_Store
 Thumbs.db
-.vscode/
 .idea/
 *.swp
 *.swo

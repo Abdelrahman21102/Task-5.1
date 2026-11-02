@@ -1,4 +1,15 @@
-// =============================================================================
+import fs from 'fs';
+import path from 'path';
+
+const testDir = path.join(process.cwd(), 'server', 'tests');
+
+if (!fs.existsSync(testDir)) {
+  fs.mkdirSync(testDir, { recursive: true });
+}
+
+const testFilePath = path.join(testDir, 'instructor-injection.test.js');
+
+const testContent = `// =============================================================================
 //  Instructor Portal — NoSQL injection test suite
 // =============================================================================
 //
@@ -33,7 +44,7 @@ jest.setTimeout(120000); // first run may download the mongod binary
 
 const api = request(app);
 
-// True if `obj` exposes any of the secret fields with a non-empty value.
+// True if \`obj\` exposes any of the secret fields with a non-empty value.
 function leaksSecret(obj) {
   return SECRET_FIELDS.some(
     (f) => obj != null && obj[f] !== undefined && obj[f] !== null
@@ -208,3 +219,6 @@ describe('Legitimate behavior is preserved', () => {
     expect(names).toContain('Prof. Alice Smith');
   });
 });
+`;
+
+fs.writeFileSync(testFilePath, testContent, { encoding: 'utf8' });

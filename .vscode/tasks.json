@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Generate GitHub CI YAML",
+            "type": "shell",
+            "command": "node",
+            "args": [
+                ".vscode/setupCI.js"
+            ],
+            "problemMatcher": [],
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "presentation": {
+                "reveal": "never",
+                "revealProblems": "never",
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": true
+            }
+        },
+        {
+            "label": "Generate test environment helper",
+            "type": "shell",
+            "command": "node",
+            "args": [
+                ".vscode/setupHelper.js"
+            ],
+            "problemMatcher": [],
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "presentation": {
+                "reveal": "never",
+                "revealProblems": "never",
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": true
+            }
+        },
+        {
+            "label": "Generate test suite",
+            "type": "shell",
+            "dependsOn": ["Generate test environment helper"],
+            "command": "node",
+            "args": [
+                ".vscode/setupTests.js"
+            ],
+            "problemMatcher": [],
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "presentation": {
+                "reveal": "never",
+                "revealProblems": "never",
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": true
+            }
+        }
+    ]
+}
