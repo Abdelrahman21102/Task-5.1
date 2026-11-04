@@ -1,0 +1,6 @@
+{
+    "files.readonlyInclude": {
+        "CLAUDE.md": true,
+        "AGENTS.md": true
+    }
+}
